@@ -42,7 +42,11 @@ void startscreen(SDL_Window *screen,uint8_t *state,uint8_t *grapset,uint8_t *ful
 		/* Check keyboard */
 		if ( SDL_PollEvent(&keyp) ) {
 			if (keyp.type == SDL_KEYDOWN) { /* Key pressed */
+				#ifdef GAMESHELL
+				if (keyp.key.keysym.sym == SDLK_RETURN) {
+				#else
 				if (keyp.key.keysym.sym == SDLK_c) { /* Change graphic set */
+				#endif
 					if (*grapset == 0)
 						*grapset = 1;
 					else

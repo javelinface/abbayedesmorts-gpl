@@ -340,10 +340,17 @@ void control (struct hero *jean,uint *keyp) {
 		if (event.type == SDL_QUIT)
 			*keyp = 10;
 		if (event.type == SDL_KEYDOWN) {
+			#ifdef GAMESHELL
+			if (event.key.keysym.sym == SDLK_j) {
+				if ((jean->push[0] == 0) && (jean->jump == 0) && (jean->ducking == 0))
+					jean->jump = 1;
+			}
+			#else
 			if (event.key.keysym.sym == SDLK_UP) {
 				if ((jean->push[0] == 0) && (jean->jump == 0) && (jean->ducking == 0))
 					jean->jump = 1;
 			}
+			#endif
 			if (event.key.keysym.sym == SDLK_DOWN) {
 				if ((jean->push[1] == 0) && (jean->jump == 0)) {
 					jean->push[1] = 1;
@@ -364,14 +371,22 @@ void control (struct hero *jean,uint *keyp) {
 			}
 			if (event.key.keysym.sym == SDLK_f)
 				*keyp = 6;
+			#ifdef GAMESHELL
+			if (event.key.keysym.sym == SDLK_RETURN)
+			#else
 			if (event.key.keysym.sym == SDLK_c)
+			#endif
 				*keyp = 9;
 			if (event.key.keysym.sym == SDLK_ESCAPE)
 				*keyp = 10;
 			}
 
 		if (event.type == SDL_KEYUP) {
+			#ifdef GAMESHELL
+			if (event.key.keysym.sym == SDLK_j)
+			#else
 			if (event.key.keysym.sym == SDLK_UP)
+			#endif
 				jean->push[0] = 0;
 			if (event.key.keysym.sym == SDLK_DOWN) {
 				jean->push[1] = 0;

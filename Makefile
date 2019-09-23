@@ -18,6 +18,11 @@ CFLAGS=		-O2 -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard
 DATADIR= "\"./\""
 endif
 
+ifeq ($(PLATFORM), gameshell)
+CFLAGS=		-O2 -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard -DGAMESHELL
+DATADIR= "\"./\""
+endif
+
 DATADIR?="\"$(PREFIX)/share/abbayev2\""
 LDFLAGS?=	-Wl,-z,relro
 
